@@ -18,10 +18,8 @@ namespace Problem_6._Football_Team_Generator
             {
                 try
                 {
-
                     var splitCommand = inputOfCommand.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToList();
                     var command = splitCommand[0];
-
                     if (command != "Team" && !allTeams.Any(t => t.Name == splitCommand[1]))
                     {
                         throw new ArgumentException($"Team {splitCommand[1]} does not exist.");
@@ -35,20 +33,17 @@ namespace Problem_6._Football_Team_Generator
                             player = new Player(splitCommand[2], stats);
                             allTeams.First(x => x.Name == splitCommand[1]).AddPlayer(player);
                             break;
-
                         case "Remove":
                             allTeams.Find(x => x.Name == splitCommand[1]).RemovePlayer(splitCommand[2]);
                             break;
-
                         case "Rating":
                             Console.WriteLine(allTeams.First(x => x.Name == splitCommand[1]).CalculateTeamRating());
                             break;
-
                         case "Team":
                             team = new Team(splitCommand[1]);
                             allTeams.Add(team);
                             break;
-                            //   default: break;
+                        default: break;
                     }
 
                 }
