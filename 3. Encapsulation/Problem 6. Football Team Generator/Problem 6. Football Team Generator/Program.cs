@@ -13,79 +13,50 @@ namespace Problem_6._Football_Team_Generator
             Player player = new Player();
             Stats stats = new Stats();
             List<Team> allTeams = new List<Team>();
-            
-            var inputOfCommand = Console.ReadLine();
-            while (inputOfCommand != "END")
+            var inputOfCommand = "";
+            while ((inputOfCommand = Console.ReadLine()) != "END")
             {
-                var splitCommand = inputOfCommand.Split(new []{';'},StringSplitOptions.RemoveEmptyEntries).ToList();
-                var command = splitCommand[0];
-                switch (command)
+                try
                 {
-                    case "Add":
-                        try
-                        {
+
+                    var splitCommand = inputOfCommand.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                    var command = splitCommand[0];
+
+                    if (command != "Team" && !allTeams.Any(t => t.Name == splitCommand[1]))
+                    {
+                        throw new ArgumentException($"Team {splitCommand[1]} does not exist.");
+                    }
+                    switch (command)
+                    {
+                        case "Add":
                             stats = new Stats(decimal.Parse(splitCommand[3]), decimal.Parse(splitCommand[4]),
                                 decimal.Parse(splitCommand[5]), decimal.Parse(splitCommand[6]),
                                 decimal.Parse(splitCommand[7]));
                             player = new Player(splitCommand[2], stats);
-                            if (allTeams.All(x => x.Name != splitCommand[1]))
-                            {
-                                Console.WriteLine($"Team {splitCommand[1]} does not exist.");
-                            }
-                            else
-                            {
-                                allTeams.First(x => x.Name == splitCommand[1]).AddPlayer(player);
-                            }
-                        }
-                        catch (ArgumentException argEx)
-                        {
-                            Console.WriteLine(argEx.Message);
-                        }
-                        break;
+                            allTeams.First(x => x.Name == splitCommand[1]).AddPlayer(player);
+                            break;
 
-                    case "Remove":
-                        try
-                        {
-                            allTeams.Find(x=>x.Name==splitCommand[1]).RemovePlayer(splitCommand[2]);
-                        }
-                        catch (ArgumentException argEx)
-                        {
-                            Console.WriteLine(argEx.Message);
-                        }
-                        break;
+                        case "Remove":
+                            allTeams.Find(x => x.Name == splitCommand[1]).RemovePlayer(splitCommand[2]);
+                            break;
 
-                    case "Rating":
-                        try
-                        {
-                            if (allTeams.All(x => x.Name != splitCommand[1]))
-                            {
-                                Console.WriteLine($"Team {splitCommand[1]} does not exist.");
-                            }
-                            else
-                            {
-                               Console.WriteLine(allTeams.First(x => x.Name == splitCommand[1]).CalculateTeamRating());
-                            }
-                        }
-                        catch (ArgumentException argEx)
-                        {
-                            Console.WriteLine(argEx.Message);
-                        }
-                        break;
+                        case "Rating":
+                            Console.WriteLine(allTeams.First(x => x.Name == splitCommand[1]).CalculateTeamRating());
+                            break;
 
-                    case "Team":
-                        try
-                        {
+                        case "Team":
                             team = new Team(splitCommand[1]);
                             allTeams.Add(team);
-                        }
-                        catch (ArgumentException argEx)
-                        {
-                            Console.WriteLine(argEx.Message);
-                        }
-                        break;
-                    default: break;
+                            break;
+                            //   default: break;
+                    }
+
                 }
-                inputOfCommand = Console.ReadLine();
+                catch (ArgumentException argEx)
+                {
+                    Console.WriteLine(argEx.Message);
+                }
+
             }
         }
     }
