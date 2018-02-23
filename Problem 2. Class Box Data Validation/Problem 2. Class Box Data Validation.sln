@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Problem2.Class_Box_Data_Validation", "Problem 2. Class Box Data Validation\Problem2.Class_Box_Data_Validation.csproj", "{5267A77A-E81F-461E-A825-494C95FE8CEE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5267A77A-E81F-461E-A825-494C95FE8CEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5267A77A-E81F-461E-A825-494C95FE8CEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5267A77A-E81F-461E-A825-494C95FE8CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5267A77A-E81F-461E-A825-494C95FE8CEE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {371B54EB-223A-478E-994F-E2B857CB6F91}
+	EndGlobalSection
+EndGlobal
