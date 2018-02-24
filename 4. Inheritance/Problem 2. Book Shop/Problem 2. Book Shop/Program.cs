@@ -13,8 +13,8 @@ namespace Problem_2._Book_Shop
             decimal bookPrice = decimal.Parse(Console.ReadLine());
             try
             {
-                book=new Book(bookAuthor,bookTitle,bookPrice);
                 goldenEditionBook = new GoldenEditionBook(bookAuthor, bookTitle, bookPrice);
+                book = goldenEditionBook;
             }
             catch (ArgumentException argEx)
             {
