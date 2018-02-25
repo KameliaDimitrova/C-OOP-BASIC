@@ -19,12 +19,20 @@ namespace Problem_4._Online_Radio_Database
                 if (input.Count == 3)
                 {
                     var duration = input[2].Split(':', StringSplitOptions.RemoveEmptyEntries).ToList();
-                    if (duration.Count == 2)
+                    if (duration.Count >=1&&duration.Count<=2&&int.TryParse(duration[0],out var minutes))
                     {
                         try
                         {
-
-                            Song song = new Song(input[0], input[1], int.Parse(duration[0]), int.Parse(duration[1]));
+                            var seconds = 0;
+                            if (duration.Count == 2)
+                            {
+                                if (!int.TryParse(duration[1], out seconds))
+                                {
+                                    Console.WriteLine("Invalid song length.");
+                                    break;
+                                }
+                            }
+                            Song song = new Song(input[0], input[1], minutes,seconds);
                             songs.Add(song);
                             Console.WriteLine(AddSong());
                         }
@@ -52,7 +60,6 @@ namespace Problem_4._Online_Radio_Database
         {
             return "Song added.";
         }
-
-
+        
     }
 }
