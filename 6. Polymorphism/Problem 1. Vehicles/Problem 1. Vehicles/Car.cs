@@ -1,12 +1,12 @@
 ﻿
-public class Car:Vechils
+public class Car:Vechils,ICar
 {
     public Car(double fuelQuantity, double literPerKm) : base(fuelQuantity, literPerKm)
     {
         this.LitersPerKm = this.LitersPerKm + 0.9;
     }
 
-    public override string DriveCar(double kmToDrive)
+    public  string DriveCar(double kmToDrive)
     {
         if (this.FuelQuantity >= kmToDrive * this.LitersPerKm)
         {
@@ -19,7 +19,7 @@ public class Car:Vechils
         }
     }
 
-    public override void RefuelCar(double fuel)
+    public void RefuelCar(double fuel)
     {
         this.FuelQuantity = this.FuelQuantity + fuel;
     }

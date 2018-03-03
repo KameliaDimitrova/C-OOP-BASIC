@@ -1,5 +1,5 @@
 ﻿
-public class Vechils:ICar,ITruck
+public class Vechils
 {
     private double fuelQuantity;
 
@@ -22,24 +22,5 @@ public class Vechils:ICar,ITruck
         this.FuelQuantity = fuelQuantity;
         this.LitersPerKm = literPerKm;
     }
-
-    public virtual string DriveCar(double kmToDrive)
-    {
-        return "If there is a fuel, no problem!";
-    }
-    
-    public virtual void RefuelCar(double fuel)
-    {
-    }
-    public virtual string DriveTruck(double kmToDrive)
-    {
-
-        return "If there is a fuel, no problem!";
-    }
-
-    public virtual void RefuelTruck(double fuel)
-    {
-    }
-
 }
 
