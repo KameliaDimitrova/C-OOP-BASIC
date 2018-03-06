@@ -58,6 +58,13 @@ public abstract class Car
         get { return durability; }
         set { durability = value; }
     }
+    private int performancePoints;
+
+    public int PerformancePoints
+    {
+        get { return performancePoints; }
+        set { performancePoints = value; }
+    }
 
     public Car(string brand, string model, int yearOfproduction, int horsepower, int acceleration, int suspension,
         int durability)

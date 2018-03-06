@@ -22,6 +22,7 @@ public class PerformanceCar : Car
         this.Suspension = this.Suspension - this.Suspension / 4;
     }
 
+   
     public override string ToString()
     {
         var addOnsResult = String.Empty;

@@ -1,5 +1,8 @@
 ﻿
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 public class CasualRace : Race
 {
@@ -8,5 +11,21 @@ public class CasualRace : Race
     {
 
     }
+
+    public override string Start()
+    {
+        if (Participants.Count > 0)
+        {
+            foreach (var car in Participants)
+            {
+                car.PerformancePoints = car.Horsepower / car.Acceleration +(car.Suspension + car.Durability);
+            }
+           Participants= Participants.OrderByDescending(x => x.PerformancePoints).ToList();
+            return base.ToString();
+        }
+
+        return $"Cannot start the race with zero participants{Environment.NewLine}";
+    }
+
 }
 

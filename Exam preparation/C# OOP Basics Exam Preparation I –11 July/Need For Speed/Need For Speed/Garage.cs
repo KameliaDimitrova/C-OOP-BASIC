@@ -15,6 +15,5 @@ public class Garage
     {
         this.ParkedCars = new List<Car>();
     }
-
 }
 

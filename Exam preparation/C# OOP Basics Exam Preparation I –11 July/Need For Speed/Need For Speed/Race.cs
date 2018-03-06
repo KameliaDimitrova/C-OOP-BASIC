@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 public abstract class Race
 {
@@ -44,21 +45,36 @@ public abstract class Race
         this.Participants = new List<Car>();
     }
 
+    public virtual string Start()
+    {
+        return "";
+    }
+
     public override string ToString()
     {
-        return $"{this.route} - {this.length}{Environment.NewLine}";
-        //1. {brand} {model} {performancePoints}PP - ${moneyWon}
-        //o    2. { brand}
-        //{ model}
-        //{ performancePoints}
-        //PP - ${ moneyWon}
-        //o    3. { brand}
-        //{ model}
-        //{ performancePoints}
-        //PP - ${ moneyWon}”
+        var place = 1;
+        Dictionary<int, int> places = new Dictionary<int, int>
+            {
+                {1,50},
+                {2,30},
+                {3,20}
+                };
 
+        var sb = new StringBuilder();
 
+        foreach (var carPar in Participants)
+        {
+            sb.Append($"{place}. {carPar.Brand} {carPar.Model} {carPar.PerformancePoints}PP - ${(PrizePool * places[place]) / 100}{Environment.NewLine}");
+            place++;
+            if (place == 4)
+            {
+                break;
+            }
+        }
 
+        return $"{this.route} - {this.length}{Environment.NewLine}" +
+        $"{sb}";
     }
+
 }
 
