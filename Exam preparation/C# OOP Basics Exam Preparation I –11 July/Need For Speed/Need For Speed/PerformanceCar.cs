@@ -10,7 +10,7 @@ public class PerformanceCar : Car
     public List<string> AddOns
     {
         get { return addOns; }
-        set { addOns = value; }
+       private set { addOns = value; }
     }
 
     public PerformanceCar(string brand, string model, int yearOfproduction, int horsepower, int acceleration,
@@ -18,8 +18,8 @@ public class PerformanceCar : Car
         : base(brand, model, yearOfproduction, horsepower, acceleration, suspension, durability)
     {
         this.AddOns = new List<string>();
-        this.Horsepower = this.Horsepower + this.Horsepower / 2;
-        this.Suspension = this.Suspension - this.Suspension / 4;
+        this.Horsepower = this.Horsepower +this.Horsepower *50/100;
+        this.Suspension = this.Suspension - this.Suspension *25/100;
     }
 
    
@@ -37,6 +37,12 @@ public class PerformanceCar : Car
         return $"{base.ToString()}" +
                $"Add-ons: {addOnsResult}{Environment.NewLine}";
 
+    }
+
+    public override void Tune(int tuneIndex, string addOn)
+    {
+        base.Tune(tuneIndex, addOn);
+        this.AddOns.Add(addOn);
     }
 }
 

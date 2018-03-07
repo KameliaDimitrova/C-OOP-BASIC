@@ -24,5 +24,11 @@ public class ShowCar : Car
         return $"{base.ToString()}" +
                $"{stars} *{Environment.NewLine}";
     }
+
+    public override void Tune(int tuneIndex, string addOn)
+    {
+        base.Tune(tuneIndex, addOn);
+       this.Stars = this.Stars + tuneIndex;
+    }
 }
 

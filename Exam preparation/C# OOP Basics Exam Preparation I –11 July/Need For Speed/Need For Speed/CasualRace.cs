@@ -14,17 +14,12 @@ public class CasualRace : Race
 
     public override string Start()
     {
-        if (Participants.Count > 0)
+        foreach (var car in Participants)
         {
-            foreach (var car in Participants)
-            {
-                car.PerformancePoints = car.Horsepower / car.Acceleration +(car.Suspension + car.Durability);
-            }
-           Participants= Participants.OrderByDescending(x => x.PerformancePoints).ToList();
-            return base.ToString();
+            car.GetOverallPerformance(car);
         }
-
-        return $"Cannot start the race with zero participants{Environment.NewLine}";
+        Participants = Participants.OrderByDescending(x => x.PerformancePoints).ToList();
+        return base.Start();
     }
 
 }

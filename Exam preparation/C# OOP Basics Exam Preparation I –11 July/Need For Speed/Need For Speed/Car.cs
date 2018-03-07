@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.ComponentModel.Design;
 
 public abstract class Car
 {
@@ -8,7 +9,7 @@ public abstract class Car
     public string Brand
     {
         get { return brand; }
-        set { brand = value; }
+        protected set { brand = value; }
     }
 
     private string model;
@@ -16,7 +17,7 @@ public abstract class Car
     public string Model
     {
         get { return model; }
-        set { model = value; }
+        protected set { model = value; }
     }
 
     private int yearOfProduction;
@@ -24,7 +25,7 @@ public abstract class Car
     public int YearOfProduction
     {
         get { return yearOfProduction; }
-        set { yearOfProduction = value; }
+        protected set { yearOfProduction = value; }
     }
 
     private int horsepower;
@@ -32,7 +33,7 @@ public abstract class Car
     public int Horsepower
     {
         get { return horsepower; }
-        set { horsepower = value; }
+        protected set { horsepower = value; }
     }
 
     private int acceleration;
@@ -40,7 +41,7 @@ public abstract class Car
     public int Acceleration
     {
         get { return acceleration; }
-        set { acceleration = value; }
+        protected set { acceleration = value; }
     }
 
     private int suspension;
@@ -48,7 +49,7 @@ public abstract class Car
     public int Suspension
     {
         get { return suspension; }
-        set { suspension = value; }
+        protected set { suspension = value; }
     }
 
     private int durability;
@@ -56,14 +57,14 @@ public abstract class Car
     public int Durability
     {
         get { return durability; }
-        set { durability = value; }
+        protected set { durability = value; }
     }
     private int performancePoints;
 
     public int PerformancePoints
     {
         get { return performancePoints; }
-        set { performancePoints = value; }
+        protected set { performancePoints = value; }
     }
 
     public Car(string brand, string model, int yearOfproduction, int horsepower, int acceleration, int suspension,
@@ -83,5 +84,25 @@ public abstract class Car
         return $"{this.brand} {this.model} {this.yearOfProduction}{Environment.NewLine}" +
                $"{this.horsepower} HP, 100 m/h in {this.acceleration} s{Environment.NewLine}" +
                $"{this.suspension} Suspension force, {this.durability} Durability{Environment.NewLine}";
+    }
+
+    public void GetOverallPerformance(Car car)
+    {
+        car.PerformancePoints = car.Horsepower / car.Acceleration + (car.Suspension + car.Durability);
+    }
+
+    public void GetEnginePerformance(Car car)
+    {
+        car.performancePoints=car.Horsepower / car.Acceleration;
+    }
+
+    public void GetSuspensionPerformance(Car car)
+    {
+        car.performancePoints = car.Suspension + car.Durability;
+    }
+    public virtual void Tune(int tuneIndex, string addOn)
+    {
+        this.Horsepower = this.Horsepower + tuneIndex;
+        this.Suspension = this.Suspension + tuneIndex * 50 / 100;
     }
 }

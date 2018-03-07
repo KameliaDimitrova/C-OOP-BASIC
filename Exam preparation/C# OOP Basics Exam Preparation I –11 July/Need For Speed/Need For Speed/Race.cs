@@ -10,7 +10,7 @@ public abstract class Race
     public int Length
     {
         get { return length; }
-        set { length = value; }
+        protected set { length = value; }
     }
 
     private string route;
@@ -18,7 +18,7 @@ public abstract class Race
     public string Route
     {
         get { return route; }
-        set { route = value; }
+        protected set { route = value; }
     }
 
     private int prizePool;
@@ -26,7 +26,7 @@ public abstract class Race
     public int PrizePool
     {
         get { return prizePool; }
-        set { prizePool = value; }
+        protected set { prizePool = value; }
     }
 
     private List<Car> participants;
@@ -34,7 +34,7 @@ public abstract class Race
     public List<Car> Participants
     {
         get { return participants; }
-        set { participants = value; }
+        protected set { participants = value; }
     }
 
     public Race(int length, string route, int prizePool)
@@ -47,34 +47,29 @@ public abstract class Race
 
     public virtual string Start()
     {
-        return "";
-    }
-
-    public override string ToString()
-    {
-        var place = 1;
-        Dictionary<int, int> places = new Dictionary<int, int>
+        if (Participants.Count > 0)
+        {
+            var place = 1;
+            var sb = new StringBuilder();
+            Dictionary<int, int> places = new Dictionary<int, int>
             {
                 {1,50},
                 {2,30},
                 {3,20}
-                };
-
-        var sb = new StringBuilder();
-
-        foreach (var carPar in Participants)
-        {
-            sb.Append($"{place}. {carPar.Brand} {carPar.Model} {carPar.PerformancePoints}PP - ${(PrizePool * places[place]) / 100}{Environment.NewLine}");
-            place++;
-            if (place == 4)
+            };
+            foreach (var carPar in Participants)
             {
-                break;
+                sb.Append($"{place}. {carPar.Brand} {carPar.Model} {carPar.PerformancePoints}PP - ${(PrizePool * places[place]) / 100}{Environment.NewLine}");
+                place++;
+                if (place == 4)
+                {
+                    break;
+                }
             }
+            return $"{this.route} - {this.length}{Environment.NewLine}" +
+                   $"{sb}";
         }
-
-        return $"{this.route} - {this.length}{Environment.NewLine}" +
-        $"{sb}";
+        return $"Cannot start the race with zero participants.{Environment.NewLine}";
     }
-
 }
 

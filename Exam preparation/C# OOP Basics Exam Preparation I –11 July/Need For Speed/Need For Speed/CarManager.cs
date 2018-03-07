@@ -17,17 +17,17 @@ public class CarManager
     public Garage Garage
     {
         get { return garage; }
-        set { garage = value; }
+       private set { garage = value; }
     }
     public Dictionary<int, Car> Cars
     {
         get { return cars; }
-        set { cars = value; }
+        private set { cars = value; }
     }
     public Dictionary<int, Race> Races
     {
         get { return races; }
-        set { races = value; }
+        private set { races = value; }
     }
 
     public CarManager()
@@ -43,10 +43,10 @@ public class CarManager
         switch (type)
         {
             case PERFORMANCE_CAR:
-                this.Cars[id] = new PerformanceCar(brand, model, yearOfProduction, horsepower, acceleration, suspension, durability);
+                this.cars[id] = new PerformanceCar(brand, model, yearOfProduction, horsepower, acceleration, suspension, durability);
                 break;
             case SHOW_CAR:
-                this.Cars[id] = new ShowCar(brand, model, yearOfProduction, horsepower, acceleration, suspension, durability);
+                this.cars[id] = new ShowCar(brand, model, yearOfProduction, horsepower, acceleration, suspension, durability);
                 break;
             default:
                 break;
@@ -55,7 +55,7 @@ public class CarManager
 
     public string Check(int id)
     {
-        return Cars[id].ToString();
+        return cars[id].ToString();
     }
 
     public void Open(int id, string type, int length, string route, int prizePool)
@@ -63,13 +63,13 @@ public class CarManager
         switch (type)
         {
             case CASUAL_RACE:
-                this.Races[id] = new CasualRace(length, route, prizePool);
+                this.races[id] = new CasualRace(length, route, prizePool);
                 break;
             case DRAG_RACE:
-                this.Races[id] = new DragRace(length, route, prizePool);
+                this.races[id] = new DragRace(length, route, prizePool);
                 break;
             case DRIFT_RACE:
-                this.Races[id] = new DriftRace(length, route, prizePool);
+                this.races[id] = new DriftRace(length, route, prizePool);
                 break;
             default:
                 break;
@@ -78,16 +78,15 @@ public class CarManager
 
     public void Participate(int carId, int raceId)
     {
-        if (garage.ParkedCars.Contains(Cars[carId]))
+        if (!garage.ParkedCars.Contains(carId))
         {
-            return;
+            this.races[raceId].Participants.Add(this.Cars[carId]);
         }
-        this.Races[raceId].Participants.Add(this.Cars[carId]);
     }
 
     public string Start(int id)
     {
-        return Races[id].Start();
+        return races[id].Start();
     }
 
     public void Park(int id)
@@ -96,30 +95,19 @@ public class CarManager
         {
             return;
         }
-        garage.ParkedCars.Add(this.Cars[id]);
+        this.garage.AddCar(id);
     }
 
    public void Unpark(int id)
    {
-       garage.ParkedCars.Remove(this.Cars[id]);
+       this.garage.RemoveCar(id);
    }
 
    public void Tune(int tuneIndex, string addOn)
     {
-        foreach (var pCars in garage.ParkedCars)
+        foreach (var carId in this.garage.ParkedCars)
         {
-            pCars.Horsepower = pCars.Horsepower + tuneIndex;
-            pCars.Suspension = pCars.Suspension + tuneIndex / 2;
-            if (pCars.GetType() == typeof(ShowCar))
-            {
-               var showCar= pCars as ShowCar;
-                showCar.Stars = showCar.Stars+ tuneIndex;
-            }
-            else if (pCars.GetType() == typeof(PerformanceCar))
-            {
-                var performanceCar = pCars as PerformanceCar;
-                performanceCar.AddOns.Add(addOn);
-            }
+            cars[carId].Tune(tuneIndex,addOn);
         }
     }
 

@@ -12,16 +12,11 @@ public class DriftRace : Race
     }
     public override string Start()
     {
-        if (Participants.Count > 0)
+        foreach (var car in Participants)
         {
-            foreach (var car in Participants)
-            {
-                car.PerformancePoints = (car.Suspension + car.Durability);
-            }
-            Participants=Participants.OrderByDescending(x => x.PerformancePoints).ToList();
-            return base.ToString();
+            car.GetSuspensionPerformance(car);
         }
-        return $"Cannot start the race with zero participants{Environment.NewLine}";
-
+        Participants = Participants.OrderByDescending(x => x.PerformancePoints).ToList();
+        return base.Start();
     }
 }
