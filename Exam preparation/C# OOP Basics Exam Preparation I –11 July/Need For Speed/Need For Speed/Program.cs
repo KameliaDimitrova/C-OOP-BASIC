@@ -16,7 +16,7 @@ namespace Need_For_Speed
             while ((input = Console.ReadLine()) != "Cops Are Here")
             {
                 var inputTokens = input
-                    .Split(' ')
+                    .Split(new char[]{' '}, StringSplitOptions.RemoveEmptyEntries)
                     .ToList();
                 var command = inputTokens[0];
                 switch (command)
@@ -25,13 +25,13 @@ namespace Need_For_Speed
                         carManager.Register(int.Parse(inputTokens[1]),inputTokens[2],inputTokens[3],inputTokens[4],int.Parse(inputTokens[5]),int.Parse(inputTokens[6]),int.Parse(inputTokens[7]),int.Parse(inputTokens[8]),int.Parse(inputTokens[9]));
                         break;
                     case "check":
-                       Console.Write(carManager.Check(int.Parse(inputTokens[1])));
+                       Console.WriteLine(carManager.Check(int.Parse(inputTokens[1])));
                         break;
                     case "open":
                         carManager.Open(int.Parse(inputTokens[1]),inputTokens[2],int.Parse(inputTokens[3]),inputTokens[4],int.Parse(inputTokens[5]));
                         break;
                     case "participate":
-                        if (!IdOfClosedRaces.Contains(int.Parse(inputTokens[1])))
+                        if (!IdOfClosedRaces.Contains(int.Parse(inputTokens[2])))
                         {
                             carManager.Participate(int.Parse(inputTokens[1]), int.Parse(inputTokens[2]));
                         }
@@ -39,7 +39,7 @@ namespace Need_For_Speed
                     case "start":
                         if (!IdOfClosedRaces.Contains(int.Parse(inputTokens[1])))
                         {
-                            Console.Write(carManager.Start(int.Parse(inputTokens[1])));
+                            Console.WriteLine(carManager.Start(int.Parse(inputTokens[1])));
                             IdOfClosedRaces.Add(int.Parse(inputTokens[1]));
                         }
                         break;

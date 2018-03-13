@@ -17,7 +17,7 @@ public class CarManager
     public Garage Garage
     {
         get { return garage; }
-       private set { garage = value; }
+        private set { garage = value; }
     }
     public Dictionary<int, Car> Cars
     {
@@ -32,8 +32,8 @@ public class CarManager
 
     public CarManager()
     {
-        this.Cars=new Dictionary<int, Car>();
-        this.Races=new Dictionary<int, Race>();
+        this.Cars = new Dictionary<int, Car>();
+        this.Races = new Dictionary<int, Race>();
         this.Garage = new Garage();
     }
 
@@ -55,7 +55,7 @@ public class CarManager
 
     public string Check(int id)
     {
-        return cars[id].ToString();
+        return cars[id].ToString().Trim();
     }
 
     public void Open(int id, string type, int length, string route, int prizePool)
@@ -86,31 +86,38 @@ public class CarManager
 
     public string Start(int id)
     {
-        return races[id].Start();
+        if (this.races[id].Participants.Count == 0)
+        {
+            return "Cannot start the race with zero participants.";
+        }
+        else
+        {
+            var result = races[id].Start();
+            races.Remove(id);
+            return result;
+        }
     }
 
     public void Park(int id)
     {
-        if(Races.Any(x=>x.Value.Participants.Contains(Cars[id])))
+        if (Races.Any(x => x.Value.Participants.Contains(Cars[id])))
         {
             return;
         }
         this.garage.AddCar(id);
     }
 
-   public void Unpark(int id)
-   {
-       this.garage.RemoveCar(id);
-   }
+    public void Unpark(int id)
+    {
+        this.garage.RemoveCar(id);
+    }
 
-   public void Tune(int tuneIndex, string addOn)
+    public void Tune(int tuneIndex, string addOn)
     {
         foreach (var carId in this.garage.ParkedCars)
         {
-            cars[carId].Tune(tuneIndex,addOn);
+            cars[carId].Tune(tuneIndex, addOn);
         }
     }
-
-
 }
 

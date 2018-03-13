@@ -11,7 +11,6 @@ public class CasualRace : Race
     {
 
     }
-
     public override string Start()
     {
         foreach (var car in Participants)
@@ -21,6 +20,5 @@ public class CasualRace : Race
         Participants = Participants.OrderByDescending(x => x.PerformancePoints).ToList();
         return base.Start();
     }
-
 }
 

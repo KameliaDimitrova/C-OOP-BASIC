@@ -37,7 +37,7 @@ public abstract class Race
         protected set { participants = value; }
     }
 
-    public Race(int length, string route, int prizePool)
+    protected Race(int length, string route, int prizePool)
     {
         this.Length = length;
         this.Route = route;
@@ -47,8 +47,7 @@ public abstract class Race
 
     public virtual string Start()
     {
-        if (Participants.Count > 0)
-        {
+       
             var place = 1;
             var sb = new StringBuilder();
             Dictionary<int, int> places = new Dictionary<int, int>
@@ -57,19 +56,18 @@ public abstract class Race
                 {2,30},
                 {3,20}
             };
+            sb.AppendLine($"{this.Route} - {this.Length}");
             foreach (var carPar in Participants)
             {
-                sb.Append($"{place}. {carPar.Brand} {carPar.Model} {carPar.PerformancePoints}PP - ${(PrizePool * places[place]) / 100}{Environment.NewLine}");
+                sb.AppendLine($"{place}. {carPar.Brand} {carPar.Model} {carPar.PerformancePoints}PP - ${(PrizePool * places[place]) / 100}");
                 place++;
                 if (place == 4)
                 {
                     break;
                 }
             }
-            return $"{this.route} - {this.length}{Environment.NewLine}" +
-                   $"{sb}";
-        }
-        return $"Cannot start the race with zero participants.{Environment.NewLine}";
+            return sb.ToString().Trim();
+   
     }
 }
 

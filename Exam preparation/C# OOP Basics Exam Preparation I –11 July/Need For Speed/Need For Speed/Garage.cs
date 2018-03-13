@@ -8,7 +8,7 @@ public class Garage
     public List<int> ParkedCars
     {
         get { return parkedCars; }
-       private set { parkedCars = value; }
+        private set { parkedCars = value; }
     }
 
     public Garage()

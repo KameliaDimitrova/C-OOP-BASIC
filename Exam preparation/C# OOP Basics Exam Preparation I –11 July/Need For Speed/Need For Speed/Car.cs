@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.ComponentModel.Design;
+using System.Text;
 
 public abstract class Car
 {
@@ -67,7 +68,7 @@ public abstract class Car
         protected set { performancePoints = value; }
     }
 
-    public Car(string brand, string model, int yearOfproduction, int horsepower, int acceleration, int suspension,
+    protected Car(string brand, string model, int yearOfproduction, int horsepower, int acceleration, int suspension,
         int durability)
     {
         this.Brand = brand;
@@ -77,13 +78,6 @@ public abstract class Car
         this.Acceleration = acceleration;
         this.Suspension = suspension;
         this.Durability = durability;
-    }
-
-    public override string ToString()
-    {
-        return $"{this.brand} {this.model} {this.yearOfProduction}{Environment.NewLine}" +
-               $"{this.horsepower} HP, 100 m/h in {this.acceleration} s{Environment.NewLine}" +
-               $"{this.suspension} Suspension force, {this.durability} Durability{Environment.NewLine}";
     }
 
     public void GetOverallPerformance(Car car)
@@ -103,6 +97,15 @@ public abstract class Car
     public virtual void Tune(int tuneIndex, string addOn)
     {
         this.Horsepower = this.Horsepower + tuneIndex;
-        this.Suspension = this.Suspension + tuneIndex * 50 / 100;
+        this.Suspension = this.Suspension + (tuneIndex * 50) / 100;
+    }
+    
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine($"{this.brand} {this.model} {this.yearOfProduction}");
+        sb.AppendLine($"{this.horsepower} HP, 100 m/h in {this.acceleration} s");
+        sb.AppendLine($"{this.suspension} Suspension force, {this.durability} Durability");
+        return sb.ToString().Trim();
     }
 }

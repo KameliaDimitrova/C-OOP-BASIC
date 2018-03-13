@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 public class ShowCar : Car
 {
@@ -19,16 +20,19 @@ public class ShowCar : Car
         this.Stars = 0;
     }
 
-    public override string ToString()
-    {
-        return $"{base.ToString()}" +
-               $"{stars} *{Environment.NewLine}";
-    }
-
     public override void Tune(int tuneIndex, string addOn)
     {
         base.Tune(tuneIndex, addOn);
-       this.Stars = this.Stars + tuneIndex;
+        this.Stars = this.Stars + tuneIndex;
     }
+
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine($"{base.ToString()}");
+        sb.AppendLine($"{this.Stars} *");
+        return sb.ToString().Trim();
+    }
+
 }
 
