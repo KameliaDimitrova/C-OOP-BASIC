@@ -2,9 +2,9 @@
 using System;
 using System.Text;
 
-public abstract class Harvester
+public abstract class Harvester:Minedraft
 {
-    private string id;
+    
     private double oreOutput;
 
     public double OreOutput
@@ -36,8 +36,9 @@ public abstract class Harvester
     }
 
     protected Harvester(string id, double oreOutput, double energyRequirement)
+        :base(id)
     {
-        this.id = id;
+       
         this.OreOutput = oreOutput;
         this.EnergyRequirement = energyRequirement;
     }
@@ -45,7 +46,7 @@ public abstract class Harvester
     public override string ToString()
     {
         var sb = new StringBuilder();
-        sb.AppendLine($"Harvester - {this.id}");
+        sb.AppendLine($"Harvester - {this.Id}");
         sb.AppendLine($"Ore Output: {this.OreOutput}");
         sb.AppendLine($"Energy Requirement: {this.EnergyRequirement}");
         return sb.ToString().Trim();

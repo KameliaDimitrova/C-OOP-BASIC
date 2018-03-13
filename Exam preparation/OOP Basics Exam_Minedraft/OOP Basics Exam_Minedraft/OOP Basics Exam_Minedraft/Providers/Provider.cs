@@ -2,9 +2,9 @@
 using System;
 using System.Text;
 
-public abstract class Provider
+public abstract class Provider:Minedraft
 {
-    private string id;
+    
     private double energyOutput;
 
     public double EnergyOutput
@@ -21,15 +21,16 @@ public abstract class Provider
     }
 
     protected Provider(string id, double energyOutput)
+        :base(id)
     {
-        this.id = id;
+      
         this.EnergyOutput = energyOutput;
     }
 
     public override string ToString()
     {
         var sb = new StringBuilder();
-        sb.AppendLine($"Provider - {this.id}");
+        sb.AppendLine($"Provider - {this.Id}");
         sb.AppendLine($"Energy Output: {this.EnergyOutput}");
         return sb.ToString().Trim();
     }
