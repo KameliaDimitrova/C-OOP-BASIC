@@ -1,6 +1,4 @@
-﻿
-using System;
-using System.Collections.Specialized;
+﻿using System;
 
 public abstract class Tyre
 {
@@ -11,41 +9,47 @@ public abstract class Tyre
         get { return name; }
         protected set { name = value; }
     }
+
     private double hardness;
 
     public double Hardness
     {
         get { return hardness; }
-     }
+        private set { hardness = value; }
+    }
 
     private double degradation;
 
     public double Degradation
     {
         get { return degradation; }
-        set
+        protected set
         {
-            if (value < 0 && this.Name == "Hard")
+            if (value < 0&&this.Name== "Hard")
             {
+              
                 throw new ArgumentException("Blown Tyre");
             }
-            if (value < 30 && this.Name == "Ultrasoft")
+            if(value < 30 && this.Name == "Ultrasoft")
             {
+               
                 throw new ArgumentException("Blown Tyre");
             }
-            degradation = value;
+           
+           degradation = value;
         }
     }
-
+    
     protected Tyre(double hardness)
     {
-        this.hardness = hardness;
+        this.Hardness = hardness;
         this.Degradation = 100;
+      
     }
 
-    public virtual void DegradateTyre(int laps)
+    public virtual void DegradateTyres()
     {
-        
     }
+
 }
 

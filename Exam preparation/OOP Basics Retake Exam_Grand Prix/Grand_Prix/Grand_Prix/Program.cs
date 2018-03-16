@@ -7,14 +7,12 @@ namespace GrandPrix
     {
         static void Main(string[] args)
         {
-            RaceTower racetower=new RaceTower();
+            RaceTower racetower = new RaceTower();
 
             var numberOfLaps = int.Parse(Console.ReadLine());
             var length = int.Parse(Console.ReadLine());
-            racetower.SetTrackInfo(numberOfLaps,length);
+            racetower.SetTrackInfo(numberOfLaps, length);
 
-            try
-            {
                 while (racetower.RaceIsOver == false)
                 {
                     var input = Console.ReadLine().Split(' ').ToList();
@@ -22,29 +20,29 @@ namespace GrandPrix
                     switch (command)
                     {
                         case "RegisterDriver":
-                            racetower.RegisterDriver(input);
+                            racetower.RegisterDriver(input.Skip(1).ToList());
                             break;
                         case "Leaderboard":
-                           Console.WriteLine(racetower.GetLeaderboard());
+                            Console.WriteLine(racetower.GetLeaderboard());
                             break;
                         case "CompleteLaps":
-                           Console.WriteLine(racetower.CompleteLaps(input));
+                            var result = racetower.CompleteLaps(input.Skip(1).ToList());
+                            if (result.Length!=0)
+                            {
+                                Console.WriteLine(result);
+                            }
                             break;
                         case "Box":
-                            racetower.DriverBoxes(input);
+                            racetower.DriverBoxes(input.Skip(1).ToList());
                             break;
                         case "ChangeWeather":
-                            racetower.ChangeWeather(input);
+                            racetower.ChangeWeather(input.Skip(1).ToList());
                             break;
                     }
                 }
             }
-            catch (ArgumentException argsEx)
-            {
-                Console.WriteLine(argsEx.Message);
-                throw;
-            }
-           
-        }
+
+
+        
     }
 }

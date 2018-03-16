@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{27C21EA8-7DF0-4F8A-B471-1152505AD1CB}</ProjectGuid>
+    <ProjectGuid>{85054DC7-F224-46E4-925B-E14F8DF694C3}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>GrandPrix</RootNamespace>
-    <AssemblyName>GrandPrix</AssemblyName>
+    <RootNamespace>OOP_Retake_Exam___Avatar</RootNamespace>
+    <AssemblyName>OOP Retake Exam - Avatar</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,18 +42,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AggressiveDriver.cs" />
-    <Compile Include="Car.cs" />
-    <Compile Include="Driver.cs" />
-    <Compile Include="EnduranceDriver.cs" />
-    <Compile Include="HardTyre.cs" />
+    <Compile Include="Benders\AirBender.cs" />
+    <Compile Include="Benders\Bender.cs" />
+    <Compile Include="Benders\EarthBender.cs" />
+    <Compile Include="Benders\FireBender.cs" />
+    <Compile Include="Benders\Nation.cs" />
+    <Compile Include="Benders\WaterBender.cs" />
+    <Compile Include="Monuments\AirMonument.cs" />
+    <Compile Include="Monuments\EarthMonument.cs" />
+    <Compile Include="Monuments\FireMonument.cs" />
+    <Compile Include="Monuments\Monument.cs" />
+    <Compile Include="Monuments\WaterMonument.cs" />
+    <Compile Include="NationsBuilder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RaceTower.cs" />
-    <Compile Include="Track.cs" />
-    <Compile Include="Tyre.cs" />
-    <Compile Include="UltrasoftTyre.cs" />
-    <Compile Include="Weather.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
